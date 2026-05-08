@@ -28,10 +28,7 @@ export default function RootLayout({
 
             <nav className="flex flex-col gap-3 text-zinc-300">
 
-              <a
-                href="/"
-                className="rounded-xl px-4 py-3 hover:bg-zinc-800 transition"
-              >
+              <a href="/" className="rounded-xl px-4 py-3 bg-white text-black font-medium">
                 Dashboard
               </a>
 
