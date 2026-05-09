@@ -1,20 +1,18 @@
-import uuid
-from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 from app.db.database import Base
+
 
 class Course(Base):
     __tablename__ = "courses"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-
-    user_id = Column(
-        UUID(as_uuid=True),
-        ForeignKey("users.id"),
-        nullable=False
-    )
+    id = Column(Integer, primary_key=True, index=True)
 
     course_name = Column(String, nullable=False)
-    instructor = Column(String)
-    term = Column(String)
+
+    course_code = Column(String, nullable=False)
+
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    user = relationship("User")
