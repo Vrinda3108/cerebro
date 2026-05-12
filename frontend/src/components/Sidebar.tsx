@@ -6,6 +6,7 @@ import { removeToken } from "@/src/services/auth";
 const navItems = [
   { label: "Dashboard", href: "/" },
   { label: "Courses", href: "/courses" },
+  { label: "Assignments", href: "/assignments" },
   { label: "Calendar", href: "/calendar" },
   { label: "Analytics", href: "/analytics" },
   { label: "Settings", href: "/settings" },
