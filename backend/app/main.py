@@ -1,27 +1,30 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.db.database import engine, Base
-
-from app.models.user import User
-from app.models.course import Course
-from app.models.assignment import Assignment
-from app.models.study_session import StudySession
-
-from app.api.course_routes import router as course_router
-from app.api.assignment_routes import router as assignment_router
-
-Base.metadata.create_all(bind=engine)
+from app.routes import auth, courses, assignments, users, schedule
 
 app = FastAPI(
     title="Cerebro API",
-    version="1.0.0"
+    description="Adaptive academic workload management system",
+    version="0.1.0",
 )
 
-app.include_router(course_router)
-app.include_router(assignment_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def root():
-    return {
-        "message": "Cerebro backend running"
-    }
+    return {"message": "Cerebro API Running"}
+
+
+app.include_router(auth.router)
+app.include_router(courses.router)
+app.include_router(assignments.router)
+app.include_router(users.router)
+app.include_router(schedule.router)
